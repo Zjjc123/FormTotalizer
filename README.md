@@ -1,1 +1,1 @@
-# FormTotalizer
+# Eastlake High School - Key Club Hour Totalizer
