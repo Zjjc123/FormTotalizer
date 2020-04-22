@@ -21,11 +21,14 @@ function Totalize() {
     var outputSheet = ss.getSheetByName("Total Hours");
     outputSheet.clear();
 
+    var list = [];
+
     for (var i = 0; i < names.length; i++)
     {
-        outputSheet.appendRow([names[i], hours[i]])
-        Logger.log("Name: " + names[i] + " Hours: " + hours[i]);
+        list.push([names[i], hours[i]])
     }
+
+    outputSheet.getRange(1, 1, list.length, 2).setValues(list);
 
     SpreadsheetApp.flush();
 }
