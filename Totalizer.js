@@ -9,7 +9,10 @@ function Totalize() {
     // Get all names
     for (var i = 1; i < values.length; i++) {
         var cell = values[i][1];
-        names.push(cell);
+        names.push(String(cell).toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' '));
     }
 
     // Get all hours
