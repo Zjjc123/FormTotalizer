@@ -13,7 +13,8 @@ function Totalize() {
             .split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ')
-            .trim());
+            .trim()
+            .replace("  ", " "));
     }
 
     // Get all hours
