@@ -15,7 +15,7 @@ function Totalize() {
     // Get all hours
     for (var i = 1; i < values.length; i++) {
         var cell = values[i][5];
-        hours.push(cell);
+        hours.push(parseFloat(cell));
     }
 
     var outputSheet = ss.getSheetByName("Total Hours");
