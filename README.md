@@ -21,11 +21,13 @@ function Totalize() {
 Function is linked to trigger (Called everytime Google Sheet is updated)
 ```javascript
     var ss = SpreadsheetApp.openById("1Cz0QLRFAcNCdjdIoSGjlnkCA_zoRd3e7_jyNeEMcTaA")
-
+```
+Find and initialize spreadsheet
+```javascript
     var names = [];
     var hours = [];
-
-
+```
+Initialize array to store names and hour for each entry
 ```javascript
     var sum = 0;
 
