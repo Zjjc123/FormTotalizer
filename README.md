@@ -32,7 +32,9 @@ Initialize array to store names and hour for each entry
     var sum = 0;
 
     var values = ss.getSheetByName("Submissions").getDataRange().getValues();
-
+```
+Get the values from the submissions sheet
+```javascript
     // Get all names
     for (var i = 1; i < values.length; i++) {
         var cell = values[i][1];
@@ -45,6 +47,12 @@ Initialize array to store names and hour for each entry
 
         );
     }
+```
+For each name 
+- remove double space
+- remove end spaces
+- title case
+```javascript
 
     // Get all hours
     for (var i = 1; i < values.length; i++) {
@@ -60,7 +68,10 @@ Initialize array to store names and hour for each entry
             hours.push(0);
         }
     }
-
+```
+Parse all hours (make sure to remove words from hours number)
+If they said yes to is a keyclub member, add value to sum
+```javascript
     var outputSheet = ss.getSheetByName("Total Hours");
     outputSheet.clear();
 
@@ -79,12 +90,16 @@ Initialize array to store names and hour for each entry
         if (!found)
             list.push([names[i], hours[i]]);
     }
-
+```
+For each entry check if name exist, if name exist add it, if not add a new row
+```javascript
     outputSheet.getRange(1, 1, list.length, 2).setValues(list);
 
     var totalSheet = ss.getSheetByName("Total KC Hours");
     totalSheet.getDataRange().getCell(1, 1).setValue(sum)
-
+```
+Set the sheet and set the total sum
+```javascript
     SpreadsheetApp.flush();
 }
 ```
