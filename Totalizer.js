@@ -46,8 +46,8 @@ function Totalize() {
 
     var list = [];
 
-    list.push([names[0], hours[0], emails[0]]);
-    for (var i = 1; i < names.length; i++) {
+    list.push(["Names", "Hours", "Emails"]);
+    for (var i = 0; i < names.length; i++) {
         var found = false;
         for (var j = 0; j < list.length; j++) {
             if (list[j][0] == names[i]) {

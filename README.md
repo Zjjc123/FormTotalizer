@@ -1,4 +1,7 @@
 # EHS Hour Totalizer
+## Automatic Email Reply
+[Link](./email_reply/EMAIL.md)
+
 ## Deploy
 ``` 
 clasp login
