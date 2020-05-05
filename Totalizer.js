@@ -3,6 +3,7 @@ function Totalize() {
 
     var names = [];
     var hours = [];
+    var emails = [];
 
     var sum = 0;
 
@@ -24,6 +25,8 @@ function Totalize() {
     // Get all hours
     for (var i = 1; i < values.length; i++) {
         var cell = values[i][5];
+        var email = values[i][12];
+
         var hourValue = parseFloat(cell);
         if (!isNaN(hourValue)) {
             hours.push(hourValue);
@@ -34,6 +37,8 @@ function Totalize() {
         {
             hours.push(0);
         }
+        Logger.log("Email: " + email);
+        emails.push(email);
     }
 
     var outputSheet = ss.getSheetByName("Total Hours");
@@ -41,7 +46,7 @@ function Totalize() {
 
     var list = [];
 
-    list.push([names[0], hours[0]]);
+    list.push([names[0], hours[0], emails[0]]);
     for (var i = 1; i < names.length; i++) {
         var found = false;
         for (var j = 0; j < list.length; j++) {
@@ -52,10 +57,10 @@ function Totalize() {
             }
         }
         if (!found)
-            list.push([names[i], hours[i]]);
+            list.push([names[i], hours[i], emails[i]]);
     }
 
-    outputSheet.getRange(1, 1, list.length, 2).setValues(list);
+    outputSheet.getRange(1, 1, list.length, 3).setValues(list);
 
     var totalSheet = ss.getSheetByName("Total KC Hours");
     totalSheet.getDataRange().getCell(1, 1).setValue(sum)
