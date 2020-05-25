@@ -33,34 +33,75 @@ function Totalize() {
             if (values[i][9] == "Yes")
                 sum += hourValue;
         }
-        else
-        {
+        else {
             hours.push(0);
         }
         Logger.log("Email: " + email);
         emails.push(email);
     }
 
+    // Output
+
     var outputSheet = ss.getSheetByName("Total Hours");
     outputSheet.clear();
 
-    var list = [];
+    var outputList = [];
 
-    list.push(["Names", "Hours", "Emails"]);
+    outputList.push(["Names", "Hours", "Emails"]);
     for (var i = 0; i < names.length; i++) {
         var found = false;
-        for (var j = 0; j < list.length; j++) {
-            if (list[j][0] == names[i]) {
-                list[j][1] += hours[i];
+        for (var j = 0; j < outputList.length; j++) {
+            if (outputList[j][0] == names[i]) {
+                outputList[j][1] += hours[i];
                 found = true;
                 break;
             }
         }
         if (!found)
-            list.push([names[i], hours[i], emails[i]]);
+            outputList.push([names[i], hours[i], emails[i]]);
     }
 
-    outputSheet.getRange(1, 1, list.length, 3).setValues(list);
+    outputSheet.getRange(1, 1, outputList.length, 3).setValues(outputList);
+
+
+    // Awards
+    var awardSheet = ss.getSheetByName("Awards");
+    awardSheet.clear();
+
+    var awardList = [];
+
+    awardList.push(["200 Hours", "", ""])
+    for (var i = 0; i < outputList.length; i++) {
+        if (outputList[i][1] >= 200)
+        {
+            awardList.push(outputList[i]);
+        }
+    }
+
+    awardList.push(["150 Hours", "", ""])
+    for (var i = 0; i < outputList.length; i++) {
+        if (outputList[i][1] >= 150 && outputList[i][1] < 200)
+        {
+            awardList.push(outputList[i]);
+        }
+    }
+
+    awardList.push(["100 Hours", "", ""])
+    for (var i = 0; i < outputList.length; i++) {
+        if (outputList[i][1] >= 100 && outputList[i][1] < 150)
+        {
+            awardList.push(outputList[i]);
+        }
+    }
+
+    awardList.push(["50 Hours", "", ""])
+    for (var i = 0; i < outputList.length; i++) {
+        if (outputList[i][1] > 50 && outputList[i][1] < 100)
+        {
+            awardList.push(outputList[i]);
+        }
+    }
+    awardSheet.getRange(1, 1, awardList.length, 3).setValues(awardList);
 
     var totalSheet = ss.getSheetByName("Total KC Hours");
     totalSheet.getDataRange().getCell(1, 1).setValue(sum)
